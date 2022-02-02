@@ -21,7 +21,8 @@ pipeline {
            steps {
                echo 'Control de Calidad prueba jenkins pipeline'
               withSonarQubeEnv('sonar-scanner') {
-                sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=RESTJerseyEjemplo/sonar-project.properties"
+//                 sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=RESTJerseyEjemplo/sonar-project.properties"
+                   sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
               }
               
               timeout(time: 5, unit: 'MINUTES') {
