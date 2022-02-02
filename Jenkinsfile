@@ -8,17 +8,19 @@ pipeline {
     stages {
         stage('Construir') {
            steps {
+               echo 'Contruyendo prueba jenkins pipeline'
                sh 'mvn -f RESTJerseyEjemplo/pom.xml clean package'
            }
         }
         
         stage('Controlar calidad') {
+            echo 'Control de Calidad prueba jenkins pipeline'
            environment {
-                   scannerHome = tool 'saviasoft-sonar-scanner'
+                   scannerHome = tool 'pruebas-sonar-scanner'
            }
            
            steps {
-              withSonarQubeEnv('saviasoft-sonar') {
+              withSonarQubeEnv('sonar-scanner') {
                 sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=RESTJerseyEjemplo/sonar-project.properties"
               }
               
