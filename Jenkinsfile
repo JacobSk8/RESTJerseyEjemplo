@@ -9,7 +9,8 @@ pipeline {
         stage('Construir') {
            steps {
                echo 'Contruyendo prueba jenkins pipeline'
-               sh 'mvn -f RESTJerseyEjemplo/pom.xml clean package'
+//                sh 'mvn -f RESTJerseyEjemplo/pom.xml clean package'
+               sh 'mvn  RESTJerseyEjemplo/pom.xml clean package'
            }
         }
         
