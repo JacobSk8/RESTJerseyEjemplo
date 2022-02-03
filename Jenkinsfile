@@ -10,7 +10,7 @@ pipeline {
            steps {
                echo 'Contruyendo prueba jenkins pipeline'
 //                sh 'mvn -f RESTJerseyEjemplo/pom.xml clean package'
-               sh 'mvn pom.xml clean package'
+               sh 'mvn  clean package'
            }
         }
         
