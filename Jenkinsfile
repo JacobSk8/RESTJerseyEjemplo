@@ -29,15 +29,15 @@ pipeline {
         }
     }
     
- post {
+/* post {
         success {  
-             mail bcc: '', body: "<b>lizJac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "lizJac CI - EXITO: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
+             mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - EXITO: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
         }  
         failure {  
-             mail bcc: '', body: "<b>lizJac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "lizJac CI - ERROR: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
+             mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - ERROR: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
         }  
         unstable {  
-            mail bcc: '', body: "<b>lizJac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "lizJac CI - INESTABLE: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
+            mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - INESTABLE: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
         }  
-    }
+    } */
 }
