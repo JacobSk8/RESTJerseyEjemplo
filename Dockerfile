@@ -1,4 +1,6 @@
-# FROM openjdk:8
+FROM openjdk:8
 # ARG JAR_FILE
-# COPY ${JAR_FILE} RESTJerseyEjemplo.jar
-# ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
+# COPY ${JAR_FILE} RESTJerseyEjemplo.jar\
+COPY /var/lib/docker/volumes/jenkins_home/_data/workspace/RESTJerseyEjemplo@tmp
+ENTRYPOINT ["java", "-jar", "/app.jar"]
