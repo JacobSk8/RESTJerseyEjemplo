@@ -1,6 +1,13 @@
-FROM openjdk:8
+#FROM openjdk:8
+#WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
+#COPY /var/lib/docker/volumes/jenkins_home/_data/workspace/RESTJerseyEjemplo@tmp
+#ENTRYPOINT ["java", "-jar", "/app.jar"]
+
 # ARG JAR_FILE
-WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
 # COPY ${JAR_FILE} RESTJerseyEjemplo.jar\
-COPY /var/lib/docker/volumes/jenkins_home/_data/workspace/RESTJerseyEjemplo@tmp
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+
+FROM openjdk:8
+WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
+COPY ./RESTJerseyEjemplo .
+EXPOSE 81
