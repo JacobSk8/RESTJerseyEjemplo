@@ -5,14 +5,17 @@ pipeline {
         maven 'maven-local'
     }
     
-//     parameters {
-//     string(name: 'container_name', defaultValue: 'pagina_web', description: 'Nombre del contenedor de docker.')
-//     string(name: 'image_name', defaultValue: 'pagina_img', description: 'Nombre de la imagene docker.')
-//     string(name: 'tag_image', defaultValue: 'lts', description: 'Tag de la imagen de la página.')
-//     string(name: 'container_port', defaultValue: '81', description: 'Puerto que usa el contenedor')
-//   }
+    parameters {
+    string(name: 'container_name', defaultValue: 'pagina_web', description: 'Nombre del contenedor de docker.')
+    string(name: 'image_name', defaultValue: 'pagina_img', description: 'Nombre de la imagene docker.')
+    string(name: 'tag_image', defaultValue: 'lts', description: 'Tag de la imagen de la página.')
+    string(name: 'container_port', defaultValue: '81', description: 'Puerto que usa el contenedor')
+  }
+    
+
     
     stages {
+        
         stage ('Initialize') {
             steps {
                 sh '''
@@ -21,11 +24,8 @@ pipeline {
                 ''' 
             }
         }
-    }
-    
-    ///////////////////
-    
-    stages {
+        ///////////////
+        
         stage('Construir') {
            steps {
                echo 'Contruyendo prueba jenkins pipeline'
@@ -49,32 +49,32 @@ pipeline {
            }
         }
         
-//         stage('build') {
-//       		steps {
-//         		dir('RESTJerseyEjemplo') {
-//        		   script {
-//         		    try {
-//           			    sh 'docker stop ${container_name}'
-//               			sh 'docker rm ${container_name}'
-//               			sh 'docker rmi ${image_name}:${tag_image}'
-//             		} catch (Exception e) {
-//               			echo 'Exception occurred: ' + e.toString()
-//             		}
-//           		}
-//           			sh 'npm run build'
-//           		sh 'docker build -t ${image_name}:${tag_image} .'
-//         		}
-//       		}
-//     	}
+        stage('build') {
+      		steps {
+        		dir('RESTJerseyEjemplo') {
+       		   script {
+        		    try {
+          			    sh 'docker stop ${container_name}'
+              			sh 'docker rm ${container_name}'
+              			sh 'docker rmi ${image_name}:${tag_image}'
+            		} catch (Exception e) {
+              			echo 'Exception occurred: ' + e.toString()
+            		}
+          		}
+          			sh 'npm run build'
+          		sh 'docker build -t ${image_name}:${tag_image} .'
+        		}
+      		}
+    	}
     	
-//     	 stage('deploy') {
-//       		steps {
-//         		sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
-//       			}
-//     		}
+    	 stage('deploy') {
+      		steps {
+        		sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
+      			}
+    		}
         
         
-        stage('Push Docker Image') {
+/*        stage('Push Docker Image') {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
@@ -83,7 +83,7 @@ pipeline {
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
 //                 sh './gradlew dockerPush'
             }
-        } 
+        } */
         
         
     }
