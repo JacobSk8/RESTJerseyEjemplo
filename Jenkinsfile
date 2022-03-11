@@ -5,6 +5,13 @@ pipeline {
         maven 'maven-local'
     }
     
+    parameters {
+    string(name: 'container_name', defaultValue: 'pagina_web', description: 'Nombre del contenedor de docker.')
+    string(name: 'image_name', defaultValue: 'pagina_img', description: 'Nombre de la imagene docker.')
+    string(name: 'tag_image', defaultValue: 'lts', description: 'Tag de la imagen de la página.')
+    string(name: 'container_port', defaultValue: '81', description: 'Puerto que usa el contenedor')
+  }
+    
     stages {
         stage('Construir') {
            steps {
@@ -29,7 +36,32 @@ pipeline {
            }
         }
         
-        stage('Push Docker Image') {
+        stage('build') {
+      		steps {
+        		dir('RESTJerseyEjemplo') {
+       		   script {
+        		    try {
+          			    sh 'docker stop ${container_name}'
+              			sh 'docker rm ${container_name}'
+              			sh 'docker rmi ${image_name}:${tag_image}'
+            		} catch (Exception e) {
+              			echo 'Exception occurred: ' + e.toString()
+            		}
+          		}
+          			sh 'npm run build'
+          		sh 'docker build -t ${image_name}:${tag_image} .'
+        		}
+      		}
+    	}
+    	
+    	 stage('deploy') {
+      		steps {
+        		sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
+      			}
+    		}
+        
+        
+/*        stage('Push Docker Image') {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
@@ -38,20 +70,9 @@ pipeline {
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
 //                 sh './gradlew dockerPush'
             }
-        }
+        } */
         
         
     }
     
-/* post {
-        success {  
-             mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - EXITO: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
-        }  
-        failure {  
-             mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - ERROR: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
-        }  
-        unstable {  
-            mail bcc: '', body: "<b>Jac CI</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jac CI - INESTABLE: Project name -> ${env.JOB_NAME}", to: "jacob.cumbal@saviasoft.com";  
-        }  
-    } */
 }
