@@ -102,13 +102,13 @@ pipeline {
 		    }
         	steps {
         		script {
-        			if (env.armarContenedor.trim().equals("S")) {
+        			
         				dockerIm = docker.build("saviasoft/RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
         			
         				docker.withRegistry('', dockerhubCredentials ) {
         					dockerIm.push()
         					dockerIm.push('latest')
-      					}
+      					
       				}	
         		}
         	}
