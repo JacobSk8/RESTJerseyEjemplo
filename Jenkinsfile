@@ -52,7 +52,7 @@ pipeline {
         stage('build') {
                environment {
                     dockerHome = tool 'myDocker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                  //  env.PATH = "${dockerHome}/bin:${env.PATH}"
            }
             
       		steps {
