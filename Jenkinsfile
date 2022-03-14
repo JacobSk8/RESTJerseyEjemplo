@@ -78,17 +78,42 @@ pipeline {
 //     		}
         
         
-        stage('Push Docker Image') {
+        
+        
+//         stage('Push Docker Image') {
+//             environment {
+//                 dockerHome = tool 'myDocker'
+//                 DOCKER_HUB_LOGIN = credentials('docker-hub')
+//             }
+//             steps {
+//                    sh '${dockerHome} --version'
+// //                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
+// //                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+//             }
+//         } 
+        
+        
+        
+        
+        
+         stage('Armar Docker Img'){
             environment {
-                dockerHome = tool 'myDocker'
-                DOCKER_HUB_LOGIN = credentials('docker-hub')
-            }
-            steps {
-                   sh '${dockerHome} --version'
-//                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
-//                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-            }
-        } 
+		   		dockerhubCredentials = 'docker-hub'
+		    }
+        	steps {
+        		script {
+        			if (env.armarContenedor.trim().equals("S")) {
+        				dockerIm = docker.build("saviasoft/RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
+        			
+        				docker.withRegistry('', dockerhubCredentials ) {
+        					dockerIm.push()
+        					dockerIm.push('latest')
+      					}
+      				}	
+        		}
+        	}
+        }
+        
         
         
     }
