@@ -80,12 +80,12 @@ pipeline {
         
         stage('Push Docker Image') {
             environment {
-//                 dockerHome = tool 'myDocker'
+                dockerHome = tool 'myDocker'
+                env.PATH = "${dockerHome}/bin:${env.PATH}"
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
-                   sh 'docker --version'
-//                 sh '${dockerHome} --version'
+                   sh '${dockerHome} --version'
 //                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
 //                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
             }
