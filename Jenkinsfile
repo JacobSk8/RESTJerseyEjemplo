@@ -84,9 +84,9 @@ pipeline {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
-                sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
-                sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-//                 sh './gradlew dockerPush'
+                   sh '${dockerHome} --version'
+//                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
+//                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
             }
         } 
         
