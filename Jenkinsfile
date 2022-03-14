@@ -66,7 +66,7 @@ pipeline {
               			echo 'Exception occurred: ' + e.toString()
             		}
           		}
-          			sh 'npm run build'
+         
           		sh 'sudo ${dockerHome} build -t ${image_name}:${tag_image} .'
         		}
       		}
