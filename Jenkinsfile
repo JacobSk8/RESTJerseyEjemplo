@@ -59,22 +59,22 @@ pipeline {
         		dir('RESTJerseyEjemplo') {
        		   script {
         		    try {
-          			    sh '${dockerHome} stop ${container_name}'
-              			sh '${dockerHome} rm ${container_name}'
-              			sh '${dockerHome} rmi ${image_name}:${tag_image}'
+          			    sh 'sudo ${dockerHome} stop ${container_name}'
+              			sh 'sudo ${dockerHome} rm ${container_name}'
+              			sh 'sudo ${dockerHome} rmi ${image_name}:${tag_image}'
             		} catch (Exception e) {
               			echo 'Exception occurred: ' + e.toString()
             		}
           		}
           			sh 'npm run build'
-          		sh '${dockerHome} build -t ${image_name}:${tag_image} .'
+          		sh 'sudo ${dockerHome} build -t ${image_name}:${tag_image} .'
         		}
       		}
     	}
     	
     	 stage('deploy') {
       		steps {
-        		sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
+        		sh 'sudo ${dockerHome} run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
       			}
     		}
         
