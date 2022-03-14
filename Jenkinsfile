@@ -81,7 +81,6 @@ pipeline {
         stage('Push Docker Image') {
             environment {
                 dockerHome = tool 'myDocker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
