@@ -50,8 +50,11 @@ pipeline {
         }
         
         stage('build') {
-                 def dockerHome = tool 'myDocker'
-                  env.PATH = "${dockerHome}/bin:${env.PATH}"
+               environment {
+                    dockerHome = tool 'myDocker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+           }
+            
       		steps {
         		dir('RESTJerseyEjemplo') {
        		   script {
