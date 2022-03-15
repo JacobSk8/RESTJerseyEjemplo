@@ -58,15 +58,15 @@ pipeline {
         		dir('RESTJerseyEjemplo') {
        		   script {
         		    try {
-          			    sh 'sudo ${dockerHome} stop ${container_name}'
-              			sh 'sudo ${dockerHome} rm ${container_name}'
-              			sh 'sudo ${dockerHome} rmi ${image_name}:${tag_image}'
+          			    sh '${dockerHome} stop ${container_name}'
+              			sh '${dockerHome} rm ${container_name}'
+              			sh '${dockerHome} rmi ${image_name}:${tag_image}'
             		} catch (Exception e) {
               			echo 'Exception occurred: ' + e.toString()
             		}
           		}
          
-          		sh 'sudo ${dockerHome} build -t ${image_name}:${tag_image} .'
+          		sh '${dockerHome} build -t ${image_name}:${tag_image} .'
         		}
       		}
     	}
