@@ -1,3 +1,5 @@
+def dockerIm
+
 pipeline {
     agent any
     
@@ -86,7 +88,15 @@ pipeline {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
-                sh '${dockerHome} ps'
+//                 sh '${dockerHome} ps'
+                script {
+                    dockerIm = docker.build("RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
+                    
+                    docker.withRegistry('', DOCKER_HUB_LOGIN ) {
+        					dockerIm.push()
+        					dockerIm.push('latest')
+      					}
+                }
 //                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
 //                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
             }
