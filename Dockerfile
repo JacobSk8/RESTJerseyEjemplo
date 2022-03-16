@@ -7,7 +7,7 @@
 # COPY ${JAR_FILE} RESTJerseyEjemplo.jar\
 
 
-FROM openjdk:8
-WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
-COPY ./RESTJerseyEjemplo .
-EXPOSE 81
+# FROM openjdk:8
+# WORKDIR /var/lib/docker/volumes/jenkins_home/_data/workspace
+# COPY ./RESTJerseyEjemplo .
+# EXPOSE 81
