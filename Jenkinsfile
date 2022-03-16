@@ -1,4 +1,3 @@
-def dockerIm
 
 pipeline {
     agent any
@@ -89,16 +88,8 @@ pipeline {
             }
             steps {
 //                 sh '${dockerHome} ps'
-                script {
-                    dockerIm = ${dockerHome}.build("RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
-                    
-                    ${dockerHome}.withRegistry('', DOCKER_HUB_LOGIN ) {
-        					dockerIm.push()
-        					dockerIm.push('latest')
-      					}
-                }
-//                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
-//                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+                sh '${dockerHome}.build -t localhost:8181/RESTJerseyEjemplo/ .'
+                sh '${dockerHome}.login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
             }
         }     
         
