@@ -87,7 +87,8 @@ pipeline {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
-                sh '${dockerHome} ps'
+//                 sh '${dockerHome} ps'
+                sh '${dockerHome} images'
 //                 sh '${dockerHome} build -t localhost:8181/RESTJerseyEjemplo/ .'
 //                 sh '${dockerHome} build RESTJerseyEjemplo/ .'
 //                 sh '${dockerHome} login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
