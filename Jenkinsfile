@@ -90,9 +90,9 @@ pipeline {
             steps {
 //                 sh '${dockerHome} ps'
                 script {
-                    dockerIm = docker.build("RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
+                    dockerIm = ${dockerHome}.build("RESTJerseyEjemplo:${env.BUILD_ID}", "RESTJerseyEjemplo/docker")
                     
-                    docker.withRegistry('', DOCKER_HUB_LOGIN ) {
+                    ${dockerHome}.withRegistry('', DOCKER_HUB_LOGIN ) {
         					dockerIm.push()
         					dockerIm.push('latest')
       					}
